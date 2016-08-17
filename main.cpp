@@ -1,9 +1,14 @@
-#include <iostream>
+#include <boost/numeric/ublas/vector.hpp>
+#include <boost/numeric/ublas/io.hpp>
 
-using namespace std;
+using namespace boost::numeric::ublas;
 
 int main()
 {
-	cout << "Hello, world." << endl;
-	return 0;
+	vector<double> v (3);
+	for (unsigned i = 0; i < v.size (); ++ i)
+	{
+		v(i) = i;
+	}
+	std::cout << v << std::endl;
 }
