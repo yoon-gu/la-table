@@ -14,6 +14,7 @@ all: main.o
 
 main.o: main.cpp
 	$(CXX) $(OPTFLAG) main.cpp $(LFLAG) -o main.o
+	./main.o
 
 test:
 	$(CXX) -fprofile-arcs -ftest-coverage main.cpp -lboost_unit_test_framework -o main.o
