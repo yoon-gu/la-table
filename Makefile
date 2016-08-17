@@ -28,6 +28,12 @@ test:
 	gcov main.cpp
 	gcov basic_operation.cpp
 
+la: matrix_factory.o
+
+matrix_factory.o: matrix_factory.cpp
+	$(CXX) $(OPTFLAG) matrix_factory.cpp $(LFLAG) -o matrix_factory.o
+	./matrix_factory.o
+
 clear:
 	rm *.o
 	rm *.gc*
