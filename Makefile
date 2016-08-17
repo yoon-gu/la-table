@@ -4,7 +4,7 @@ endif
 ifeq ($(CXX),)
     CXX = g++
 endif
-LFLAG = -lstdc++
+LFLAG =
 FFLAG = -fopenmp
 OPTFLAG = -O3
 
