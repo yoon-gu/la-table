@@ -1,5 +1,8 @@
 #include <boost/numeric/ublas/vector.hpp>
 #include <boost/numeric/ublas/matrix.hpp>
+#include <boost/numeric/ublas/triangular.hpp>
+#include <boost/numeric/ublas/symmetric.hpp>
+#include <boost/numeric/ublas/banded.hpp>
 #include <boost/numeric/ublas/io.hpp>
 
 using namespace boost::numeric::ublas;
@@ -37,7 +40,7 @@ int main()
 	{
 		for (unsigned j = 0; j < m.size2 (); ++ j)
 		{
-			m (i, j) = 3 * i + j;
+			m(i, j) = 3 * i + j;
 		}
 	}
 	std::cout << "matrix \t\t" << m << std::endl;
@@ -53,5 +56,38 @@ int main()
     // scalar matrix
     scalar_matrix<double> m_scalar(3, 3, 100);
     std::cout << "scalar matrix\t" << m_scalar << std::endl;
+
+    // lower and upper triangular matrix
+    triangular_matrix<double, lower> ml(3, 3);
+    for (unsigned i = 0; i < ml.size1 (); ++ i)
+        for (unsigned j = 0; j <= i; ++ j)
+            ml(i, j) = 3 * i + j;
+    std::cout << "lower triangular matrix\t" << ml << std::endl;
+
+    triangular_matrix<double, upper> mu(3, 3);
+    for (unsigned i = 0; i < mu.size1 (); ++ i)
+        for (unsigned j = i; j < mu.size2 (); ++ j)
+            mu(i, j) = 3 * i + j;
+    std::cout << "upper triangular matrix\t" << mu << std::endl;
+
+    // lower and upper symmetric matrix
+    symmetric_matrix<double, lower> ml_symm(3, 3);
+    for (unsigned i = 0; i < ml_symm.size1 (); ++ i)
+        for (unsigned j = 0; j <= i; ++ j)
+            ml_symm(i, j) = 3 * i + j;
+    std::cout << "lower symmetric matrix\t" << ml_symm << std::endl;
+
+    symmetric_matrix<double, upper> mu_symm(3, 3);
+    for (unsigned i = 0; i < mu_symm.size1 (); ++ i)
+        for (unsigned j = i; j < mu_symm.size2 (); ++ j)
+            mu_symm(i, j) = 3 * i + j;
+    std::cout << "upper symmetric matrix\t" << mu_symm << std::endl;
+
+    // banded matrix
+    banded_matrix<double> m_banded (3, 3, 1, 1);
+    for (signed i = 0; i < signed (m_banded.size1 ()); ++ i)
+        for (signed j = std::max (i - 1, 0); j < std::min (i + 2, signed (m_banded.size2 ())); ++ j)
+            m_banded (i, j) = 3 * i + j;
+    std::cout << "banded matrix\t" << m_banded << std::endl;
 	return 0;
 }
