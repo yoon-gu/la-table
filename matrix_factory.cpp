@@ -1,10 +1,8 @@
 #include <iostream>
 #include <boost/numeric/ublas/symmetric.hpp>
-// #include <boost/numeric/bindings/atlas/clapack.hpp>
 #include <boost/numeric/ublas/io.hpp>
 
 namespace ublas = boost::numeric::ublas;
-// namespace atlas = boost::numeric::bindings::atlas;
 
 ublas::matrix<double> get_A(int N, double a0 = 1, double a1 = 1)
 {
