@@ -1,5 +1,6 @@
 #include <iostream>
 #include <boost/numeric/ublas/symmetric.hpp>
+#include <boost/numeric/ublas/lu.hpp>
 #include <boost/numeric/ublas/io.hpp>
 
 namespace ublas = boost::numeric::ublas;
@@ -32,7 +33,7 @@ ublas::matrix<double> get_K(int N)
 
 int main()
 {
-	int N = 4;
+	int N = 3;
 	double h = 1.0 / (N - 1);
 	ublas::matrix<double> K = get_K(N);
 	std::cout << K << std::endl;
@@ -46,5 +47,12 @@ int main()
 	ublas::matrix<double> A2 = get_A(N, 1, 2);
 	std::cout << A2 << std::endl;
 
+	ublas::matrix<double> Kinv(N, N);
+	Kinv.assign(ublas::identity_matrix<double> (K.size1()));
+	ublas::permutation_matrix<size_t> pm(K.size1());
+	ublas::lu_factorize(K, pm);
+	ublas::lu_substitute(K, pm, Kinv);
+
+	std::cout << Kinv << std::endl;
 	return 0;
 }
