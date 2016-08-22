@@ -42,5 +42,11 @@ int main()
 	ublas::lu_substitute(K, pm, Kinv);
 
 	std::cout << Kinv << std::endl;
+
+	double* tmp = (double*) Kinv.data().begin();
+	int size = Kinv.data().size();
+
+	for (int i = 0; i < size; ++i)
+		std::cout << tmp[i] << std::endl;
 	return 0;
 }
